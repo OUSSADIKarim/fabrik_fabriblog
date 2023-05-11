@@ -9,7 +9,7 @@ import cookieParser from "cookie-parser"
 
 dotenv.config()
 
-const port = process.env.PORT
+const port = process.env.PORT || 4040
 const dbUri = process.env.DBURI
 
 const app = express()
@@ -30,7 +30,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(csurfProtection)
-app.use(cors())
+app.use(cors({ origin: "http://localhost:5173", credentials: true }))
 
 app.use("/users", userRouter)
 app.use("/articles", articleRouter)

@@ -1,5 +1,4 @@
 import mongoose from "mongoose"
-import Email from "mongoose-type-email"
 import { hashPassword } from "./../utils/hashPassword.js"
 
 const Schema = mongoose.Schema

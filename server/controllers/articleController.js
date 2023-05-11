@@ -3,6 +3,8 @@ import { Article } from "../models/Article.js"
 export const getArticles = async (req, res) => {
   try {
     const articles = await Article.find()
+      .select("_id title user")
+      .populate("user")
     res.status(200).json(articles)
   } catch (error) {
     res.status(400).json(error)
