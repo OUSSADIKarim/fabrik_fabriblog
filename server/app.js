@@ -2,7 +2,7 @@ import express from "express"
 import mongoose from "mongoose"
 import dotenv from "dotenv"
 import cors from "cors"
-import { csurfProtection } from "./middlewares/jwt.js"
+import { csurfProtection, userAuthValidation } from "./middlewares/jwt.js"
 import { userRouter } from "./routes/userRoutes.js"
 import { articleRouter } from "./routes/articleRoutes.js"
 import cookieParser from "cookie-parser"
@@ -31,6 +31,8 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(csurfProtection)
 app.use(cors({ origin: "http://localhost:5173", credentials: true }))
+
+app.use(userAuthValidation)
 
 app.use("/users", userRouter)
 app.use("/articles", articleRouter)

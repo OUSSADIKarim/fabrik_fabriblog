@@ -6,6 +6,7 @@ import {
   getUsers,
   updateUser,
   login,
+  logout,
 } from "../controllers/userController.js"
 import { userAuthValidation } from "../middlewares/jwt.js"
 
@@ -15,5 +16,6 @@ userRouter.get("/", getUsers)
 userRouter.get("/:userId", getUser)
 userRouter.post("/register", register)
 userRouter.post("/login", login)
+userRouter.delete("/logout", logout)
 userRouter.patch("/:userId", userAuthValidation, updateUser)
 userRouter.delete("/:userId", userAuthValidation, deleteUser)

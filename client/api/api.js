@@ -24,3 +24,21 @@ export const register = async (email, password, csrf) => {
   )
   return result.data
 }
+
+export const login = async (email, password, csrf) => {
+  const result = await api.post(
+    "/users/login",
+    { email, password },
+    { headers: { "X-CSRF-Token": csrf } }
+  )
+
+  return result.data
+}
+
+export const logout = async (csrf) => {
+  const result = await api.delete("/users/logout", {
+    headers: { "X-CSRF-Token": csrf },
+  })
+
+  return result.data
+}

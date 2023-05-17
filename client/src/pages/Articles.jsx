@@ -11,7 +11,6 @@ const Articles = () => {
     queryKey: ["articles"],
     queryFn: async () => {
       const data = await getAllArticles()
-      console.log(data)
       return data
     },
   })

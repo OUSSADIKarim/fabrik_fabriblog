@@ -1,5 +1,7 @@
+import Articles from "./Articles"
+
 const Profile = () => {
-  return <>Profile</>
+  return <Articles />
 }
 
 export default Profile

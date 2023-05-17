@@ -41,6 +41,7 @@ export const login = async (req, res) => {
       return
     }
     const passwordCompare = await bcrypt.compare(password, user.password)
+    console.log(passwordCompare)
     if (!passwordCompare) {
       res.status(400).json("incorrect password")
       return
@@ -52,6 +53,15 @@ export const login = async (req, res) => {
       { httpOnly: true, secure: true, maxAge: 60 * 60 * 24 * 1000 }
     )
     res.status(200).json(user)
+  } catch (error) {
+    res.status(400).json(error)
+  }
+}
+
+export const logout = async (req, res) => {
+  try {
+    res.clearCookie("authToken")
+    res.status(200).json("logout success")
   } catch (error) {
     res.status(400).json(error)
   }
@@ -73,7 +83,9 @@ export const updateUser = async (req, res) => {
 }
 
 export const deleteUser = async (req, res) => {
-  const { userId } = req.params
+  console.log("here")
+  const userId = res.locals.userId
+  console.log(userId)
   try {
     const deletedUser = await User.findByIdAndDelete(userId)
     res.status(200).json(deletedUser)
